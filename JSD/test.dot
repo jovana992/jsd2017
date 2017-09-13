@@ -1,0 +1,32 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+49558288 -> 49558512 [label="models:0" arrowtail=diamond dir=both]
+49558512 -> 49558384 [label="elements:0" arrowtail=diamond dir=both]
+49558384 -> 49558576 [label="datatype" arrowtail=diamond dir=both]
+49558576 -> 49558640 [label="charfield" arrowtail=diamond dir=both]
+49558640 -> 49558832 [label="parameters:0" arrowtail=diamond dir=both]
+49558832 -> 49558896 [label="max_length" arrowtail=diamond dir=both]
+49558896[label="{:MaxLength|+number:str='5'\l}"]
+49558832[label="{:Parameters|}"]
+49558640 -> 49558864 [label="parameters:1" arrowtail=diamond dir=both]
+49558864 -> 49558960 [label="null" arrowtail=diamond dir=both]
+49558960[label="{:Null|+value:str='true'\l}"]
+49558864[label="{:Parameters|}"]
+49558640[label="{:CharField|}"]
+49558576[label="{:DataType|}"]
+49558384[label="{el1:ModelElement|}"]
+49558512[label="{test:Model|}"]
+49558288[label="{:Models|}"]
+
+}

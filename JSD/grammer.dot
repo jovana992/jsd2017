@@ -1,0 +1,66 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+48536384 -> 48536856[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+48536384[ label="{Models|}"]
+
+48536856 -> 48713776[arrowtail=diamond, dir=both, headlabel="elements 0..*"]
+48536856[ label="{Model|+name:ID\l}"]
+
+48713776 -> 48714248[arrowtail=diamond, dir=both, headlabel="datatype "]
+48713776[ label="{ModelElement|+name:ID\l}"]
+
+48714248 -> 48714720[arrowtail=diamond, dir=both, headlabel="charfield "]
+48714248 -> 48715192[arrowtail=diamond, dir=both, headlabel="textfield "]
+48714248[ label="{DataType|}"]
+
+48714720 -> 48715664[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+48714720[ label="{CharField|}"]
+
+48715192 -> 48715664[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+48715192[ label="{TextField|}"]
+
+48715664 -> 48716136[arrowtail=diamond, dir=both, headlabel="max_length "]
+48715664 -> 48717080[arrowtail=diamond, dir=both, headlabel="null "]
+48715664[ label="{Parameters|}"]
+
+48716136[ label="{MaxLength|+number:Number\l}"]
+
+48716608[ label="{Number|[0-9]+}"]
+
+48717080[ label="{Null|+value:Value\l}"]
+
+48746544[ label="{Value|True\|False\|true\|false}"]
+
+48528664[ label="{ID|}"]
+
+48533552[ label="{STRING|}"]
+
+48534024[ label="{BOOL|}"]
+
+48534496[ label="{INT|}"]
+
+48534968[ label="{FLOAT|}"]
+
+48535440[ label="{NUMBER|}"]
+48535440 -> 48534968 [dir=back]
+48535440 -> 48534496 [dir=back]
+
+48535912[ label="{BASETYPE|}"]
+48535912 -> 48535440 [dir=back]
+48535912 -> 48534024 [dir=back]
+48535912 -> 48528664 [dir=back]
+48535912 -> 48533552 [dir=back]
+
+
+}

@@ -1,0 +1,45 @@
+Models:
+	models *= Model
+;
+
+Model:
+	'model' name = ID '{'
+	elements *= ModelElement
+	'}'';'
+;
+
+ModelElement:
+	name = ID '=' datatype = DataType
+;
+
+DataType:
+    charfield = CharField | textfield = TextField
+;
+
+CharField:
+    'CharField' '(' parameters *= Parameters[','] ')'
+;
+
+TextField:
+    'TextField' '(' parameters *= Parameters[','] ')'
+;
+
+Parameters:
+    max_length = MaxLength | null = Null
+;
+
+MaxLength:
+    'max_length' '=' number = Number
+;
+
+Number:
+    /[0-9]+/
+;
+
+Null:
+    'null' '=' value = Value
+;
+
+Value:
+    'True' | 'False' | 'true' | 'false'
+;
