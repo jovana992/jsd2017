@@ -1,3 +1,2 @@
-model test{
-	el1 = CharField(max_length = 5, null = true)
-};
+page "Registracija korisnika";
+page "TV Prodaja";

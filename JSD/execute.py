@@ -1,7 +1,7 @@
 '''
-Created on 06.12.2015.
+Created on 29.9.2018
 
-@author: xx
+@author: Jovana
 '''
 
 from textx.metamodel import metamodel_from_file
@@ -49,10 +49,29 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
     query_set = proba.interpreter(model)'''
 
     print('ICF')
-    print(model.models[0].elements[0].name)
+    print(model.pages[0].title)
 
-    with open('E:/Jovana/Desktop/test/test.html', 'w') as f:
-        # a = test(models1)
-        a = model.models[0].elements[0].name
-        f.write(a)
+    pages = model.pages
+
+    #Generator html stranice
+
+    def test(page):
+        # for page in pages:
+            string = '<!DOCTYPE html>\n'
+            string += '<html>\n'
+            string += '<head>\n'
+            string += '<title>' + page.title + '</title>\n'
+            string += '</head>'
+            string += '<body>'
+            string += '/<body>'
+            string += '/<html>'
+
+            return string
+
+    for page in pages:
+
+        with open('E:/Jovana/Desktop/test/' + page.title + '.html', 'w') as f:
+            a = test(page)
+            # a = model.pages[0].title
+            f.write(a)
 

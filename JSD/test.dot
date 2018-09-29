@@ -11,22 +11,10 @@
     edge[dir=black,arrowtail=empty]
 
 
-2022439074336 -> 2022447938640 [label="models:0" arrowtail=diamond dir=both]
-2022447938640 -> 2022447974160 [label="elements:0" arrowtail=diamond dir=both]
-2022447974160 -> 2022447974440 [label="datatype" arrowtail=diamond dir=both]
-2022447974440 -> 2022447974664 [label="charfield" arrowtail=diamond dir=both]
-2022447974664 -> 2022447974888 [label="parameters:0" arrowtail=diamond dir=both]
-2022447974888 -> 2022447975000 [label="max_length" arrowtail=diamond dir=both]
-2022447975000[label="{:MaxLength|+number:str='5'\l}"]
-2022447974888[label="{:Parameters|}"]
-2022447974664 -> 2022447974944 [label="parameters:1" arrowtail=diamond dir=both]
-2022447974944 -> 2022447799544 [label="null" arrowtail=diamond dir=both]
-2022447799544[label="{:Null|+value:str='true'\l}"]
-2022447974944[label="{:Parameters|}"]
-2022447974664[label="{:CharField|}"]
-2022447974440[label="{:DataType|}"]
-2022447974160[label="{el1:ModelElement|}"]
-2022447938640[label="{test:Model|}"]
-2022439074336[label="{:Models|}"]
+1907502479736 -> 1907502498648 [label="pages:0" arrowtail=diamond dir=both]
+1907502498648[label="{:Page|+title:str='Registracija korisnika'\l}"]
+1907502479736 -> 1907502498704 [label="pages:1" arrowtail=diamond dir=both]
+1907502498704[label="{:Page|+title:str='TV Prodaja'\l}"]
+1907502479736[label="{:Pages|}"]
 
 }
