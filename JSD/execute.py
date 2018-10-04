@@ -76,12 +76,22 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             for pageElement in page['pageElements']:
                 if pageElement.elementType.heading is not None:
                     level = str(pageElement.elementType.heading.level)
-                    string += '<h' + level + '>' + '</h' + level + '>'
+                    print(level)
+                    string += '<h' + level + '>'
+                    headText = pageElement.elementType.heading.parameters[0].text.content
+                    print(headText)
+                    if headText is not None:
+                        string += headText
+                        string += '</h' + level + '>'
 
-            string += '/<body>'
-            string += '/<html>'
+                if pageElement.elementType.paragraph is not None:
+                    parText = pageElement.elementType.paragraph.parameters[0].text.content
+                    print(parText)
+                    string += '<p>' + parText + '</p>'
+                    string += '/<body>'
+                    string += '/<html>'
 
-            return string
+                    return string
 
     for page in pages1:
         with open('E:/Jovana/Desktop/test/' + str(page['page']) + '.html', 'w') as f:

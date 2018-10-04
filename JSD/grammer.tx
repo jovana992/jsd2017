@@ -13,9 +13,21 @@ PageElement:
 ;
 
 ElementType:
-    heading = Heading
+    heading = Heading | paragraph = Paragraph
 ;
 
 Heading:
-    'Heading' '(''level' '=' level = INT')'
+    'Heading' '(''level' '=' level = INT ',' parameters *= Parameters[',']')'
+;
+
+Paragraph:
+    'Paragraph' '(' parameters *= Parameters[','] ')'
+;
+
+Parameters:
+    text = Text
+;
+
+Text:
+    'text' '=' content = STRING
 ;

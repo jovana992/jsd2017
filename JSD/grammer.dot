@@ -11,42 +11,52 @@
     edge[dir=black,arrowtail=empty]
 
 
-2312161750072 -> 2312161755736[arrowtail=diamond, dir=both, headlabel="pages 0..*"]
-2312161750072[ label="{Pages|}"]
+2120794809352 -> 2120794804632[arrowtail=diamond, dir=both, headlabel="pages 0..*"]
+2120794809352[ label="{Pages|}"]
 
-2312161755736 -> 2312161751960[arrowtail=diamond, dir=both, headlabel="pageElements 0..*"]
-2312161755736[ label="{Page|+title:STRING\l}"]
+2120794804632 -> 2120794818792[arrowtail=diamond, dir=both, headlabel="pageElements 0..*"]
+2120794804632[ label="{Page|+title:STRING\l}"]
 
-2312161751960 -> 2312161737800[arrowtail=diamond, dir=both, headlabel="elementType "]
-2312161751960[ label="{PageElement|}"]
+2120794818792 -> 2120794821624[arrowtail=diamond, dir=both, headlabel="elementType "]
+2120794818792[ label="{PageElement|}"]
 
-2312161737800 -> 2312161745352[arrowtail=diamond, dir=both, headlabel="heading "]
-2312161737800[ label="{ElementType|}"]
+2120794821624 -> 2120794792360[arrowtail=diamond, dir=both, headlabel="heading "]
+2120794821624 -> 2120794795192[arrowtail=diamond, dir=both, headlabel="paragraph "]
+2120794821624[ label="{ElementType|}"]
 
-2312161745352[ label="{Heading|+level:INT\l}"]
+2120794792360 -> 2120794825400[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+2120794792360[ label="{Heading|+level:INT\l}"]
 
-2312160804760[ label="{ID|}"]
+2120794795192 -> 2120794825400[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+2120794795192[ label="{Paragraph|}"]
 
-2312161756680[ label="{STRING|}"]
+2120794825400 -> 2120794827288[arrowtail=diamond, dir=both, headlabel="text "]
+2120794825400[ label="{Parameters|}"]
 
-2312161744408[ label="{BOOL|}"]
+2120794827288[ label="{Text|+content:STRING\l}"]
 
-2312161725528[ label="{INT|}"]
+2120794914136[ label="{ID|}"]
 
-2312161739688[ label="{FLOAT|}"]
+2120794797080[ label="{STRING|}"]
 
-2312161727416[ label="{NUMBER|}"]
-2312161727416 -> 2312161739688 [dir=back]
-2312161727416 -> 2312161725528 [dir=back]
+2120794802744[ label="{BOOL|}"]
 
-2312161752904[ label="{BASETYPE|}"]
-2312161752904 -> 2312161727416 [dir=back]
-2312161752904 -> 2312161744408 [dir=back]
-2312161752904 -> 2312160804760 [dir=back]
-2312161752904 -> 2312161756680 [dir=back]
+2120794810296[ label="{INT|}"]
 
-2312161728360[ label="{*OBJECT|}"]
-2312161728360 -> 2312161752904 [dir=back]
+2120794808408[ label="{FLOAT|}"]
+
+2120794798968[ label="{NUMBER|}"]
+2120794798968 -> 2120794808408 [dir=back]
+2120794798968 -> 2120794810296 [dir=back]
+
+2120794815016[ label="{BASETYPE|}"]
+2120794815016 -> 2120794798968 [dir=back]
+2120794815016 -> 2120794802744 [dir=back]
+2120794815016 -> 2120794914136 [dir=back]
+2120794815016 -> 2120794797080 [dir=back]
+
+2120794805576[ label="{*OBJECT|}"]
+2120794805576 -> 2120794815016 [dir=back]
 
 
 }
