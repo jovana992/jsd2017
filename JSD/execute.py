@@ -52,7 +52,16 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
     print(model.pages[0].title)
 
     pages = model.pages
+    pages1 = []
+    for page in pages:
+        pageElements = page.pageElements
+        dict = {}
+        dict['page'] = page.title
+        dict['pageElements'] = pageElements
+        print(dict)
+        pages1.append(dict)
 
+    print(pages1)
     #Generator html stranice
 
     def test(page):
@@ -60,17 +69,22 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             string = '<!DOCTYPE html>\n'
             string += '<html>\n'
             string += '<head>\n'
-            string += '<title>' + page.title + '</title>\n'
+            string += '<title>' + str(page['page']) + '</title>\n'
             string += '</head>'
             string += '<body>'
+
+            for pageElement in page['pageElements']:
+                if pageElement.elementType.heading is not None:
+                    level = str(pageElement.elementType.heading.level)
+                    string += '<h' + level + '>' + '</h' + level + '>'
+
             string += '/<body>'
             string += '/<html>'
 
             return string
 
-    for page in pages:
-
-        with open('E:/Jovana/Desktop/test/' + page.title + '.html', 'w') as f:
+    for page in pages1:
+        with open('E:/Jovana/Desktop/test/' + str(page['page']) + '.html', 'w') as f:
             a = test(page)
             # a = model.pages[0].title
             f.write(a)

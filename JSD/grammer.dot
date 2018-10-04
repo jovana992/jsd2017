@@ -11,33 +11,42 @@
     edge[dir=black,arrowtail=empty]
 
 
-1907492519080 -> 1907492531352[arrowtail=diamond, dir=both, headlabel="pages 0..*"]
-1907492519080[ label="{Pages|}"]
+2312161750072 -> 2312161755736[arrowtail=diamond, dir=both, headlabel="pages 0..*"]
+2312161750072[ label="{Pages|}"]
 
-1907492531352[ label="{Page|+title:STRING\l}"]
+2312161755736 -> 2312161751960[arrowtail=diamond, dir=both, headlabel="pageElements 0..*"]
+2312161755736[ label="{Page|+title:STRING\l}"]
 
-1907491723112[ label="{ID|}"]
+2312161751960 -> 2312161737800[arrowtail=diamond, dir=both, headlabel="elementType "]
+2312161751960[ label="{PageElement|}"]
 
-1907492528520[ label="{STRING|}"]
+2312161737800 -> 2312161745352[arrowtail=diamond, dir=both, headlabel="heading "]
+2312161737800[ label="{ElementType|}"]
 
-1907492520024[ label="{BOOL|}"]
+2312161745352[ label="{Heading|+level:INT\l}"]
 
-1907492512472[ label="{INT|}"]
+2312160804760[ label="{ID|}"]
 
-1907492530408[ label="{FLOAT|}"]
+2312161756680[ label="{STRING|}"]
 
-1907492516248[ label="{NUMBER|}"]
-1907492516248 -> 1907492530408 [dir=back]
-1907492516248 -> 1907492512472 [dir=back]
+2312161744408[ label="{BOOL|}"]
 
-1907492523800[ label="{BASETYPE|}"]
-1907492523800 -> 1907492516248 [dir=back]
-1907492523800 -> 1907492520024 [dir=back]
-1907492523800 -> 1907491723112 [dir=back]
-1907492523800 -> 1907492528520 [dir=back]
+2312161725528[ label="{INT|}"]
 
-1907492510584[ label="{*OBJECT|}"]
-1907492510584 -> 1907492523800 [dir=back]
+2312161739688[ label="{FLOAT|}"]
+
+2312161727416[ label="{NUMBER|}"]
+2312161727416 -> 2312161739688 [dir=back]
+2312161727416 -> 2312161725528 [dir=back]
+
+2312161752904[ label="{BASETYPE|}"]
+2312161752904 -> 2312161727416 [dir=back]
+2312161752904 -> 2312161744408 [dir=back]
+2312161752904 -> 2312160804760 [dir=back]
+2312161752904 -> 2312161756680 [dir=back]
+
+2312161728360[ label="{*OBJECT|}"]
+2312161728360 -> 2312161752904 [dir=back]
 
 
 }

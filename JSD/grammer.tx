@@ -3,5 +3,19 @@ Pages:
 ;
 
 Page:
-    'page' title = STRING';'
+    'page' title = STRING '{'
+    pageElements *= PageElement
+    '}'';'
+;
+
+PageElement:
+    elementType = ElementType
+;
+
+ElementType:
+    heading = Heading
+;
+
+Heading:
+    'Heading' '(''level' '=' level = INT')'
 ;

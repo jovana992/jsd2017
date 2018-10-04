@@ -11,10 +11,22 @@
     edge[dir=black,arrowtail=empty]
 
 
-1907502479736 -> 1907502498648 [label="pages:0" arrowtail=diamond dir=both]
-1907502498648[label="{:Page|+title:str='Registracija korisnika'\l}"]
-1907502479736 -> 1907502498704 [label="pages:1" arrowtail=diamond dir=both]
-1907502498704[label="{:Page|+title:str='TV Prodaja'\l}"]
-1907502479736[label="{:Pages|}"]
+2312163637456 -> 2312172169480 [label="pages:0" arrowtail=diamond dir=both]
+2312172169480 -> 2312172169592 [label="pageElements:0" arrowtail=diamond dir=both]
+2312172169592 -> 2312172169928 [label="elementType" arrowtail=diamond dir=both]
+2312172169928 -> 2312172170096 [label="heading" arrowtail=diamond dir=both]
+2312172170096[label="{:Heading|+level:int=1\l}"]
+2312172169928[label="{:ElementType|}"]
+2312172169592[label="{:PageElement|}"]
+2312172169480[label="{:Page|+title:str='Registracija korisnika'\l}"]
+2312163637456 -> 2312172169536 [label="pages:1" arrowtail=diamond dir=both]
+2312172169536 -> 2312172169872 [label="pageElements:0" arrowtail=diamond dir=both]
+2312172169872 -> 2312172170152 [label="elementType" arrowtail=diamond dir=both]
+2312172170152 -> 2312172170264 [label="heading" arrowtail=diamond dir=both]
+2312172170264[label="{:Heading|+level:int=2\l}"]
+2312172170152[label="{:ElementType|}"]
+2312172169872[label="{:PageElement|}"]
+2312172169536[label="{:Page|+title:str='TV Prodaja'\l}"]
+2312163637456[label="{:Pages|}"]
 
 }

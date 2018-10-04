@@ -1,2 +1,7 @@
-page "Registracija korisnika";
-page "TV Prodaja";
+page "Registracija korisnika" {
+    Heading (level = 1)
+};
+
+page "TV Prodaja" {
+    Heading (level = 2)
+};
