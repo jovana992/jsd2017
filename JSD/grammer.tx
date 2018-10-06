@@ -25,9 +25,22 @@ Paragraph:
 ;
 
 Parameters:
-    text = Text
+    text = Text | textColor = TextColor | backgroundColor = BackgroundColor
 ;
 
 Text:
     'text' '=' content = STRING
 ;
+
+TextColor:
+    'textColor' '=' colorValue = ColorValue
+;
+
+BackgroundColor:
+    'backgroundColor' '=' colorValue = ColorValue
+;
+
+ColorValue:
+    'red' | 'blue' | 'yellow' | 'black' | 'white'
+;
+

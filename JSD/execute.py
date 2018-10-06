@@ -68,12 +68,28 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
         # for page in pages:
             string = '<!DOCTYPE html>\n'
             string += '<html>\n'
-            string += '<head>\n'
-            string += '<title>' + str(page['page']) + '</title>\n'
-            string += '</head>'
-            string += '<body>'
-
             for pageElement in page['pageElements']:
+                string += '<head>\n'
+                string += '<title>' + str(page['page']) + '</title>\n'
+                string += '<style>'
+                if pageElement.elementType.heading is not None:
+                    level = str(pageElement.elementType.heading.level)
+                    string += 'h' + level + '{'
+                    numberOfHeadingParameters = len(pageElement.elementType.heading.parameters)
+                    print('br parametara ' + str(numberOfHeadingParameters))
+                    if numberOfHeadingParameters == 0 or numberOfHeadingParameters == 1:
+                        string += '}'
+                    elif numberOfHeadingParameters == 2:
+                        if pageElement.elementType.heading.parameters[1].textColor is not None:
+                            headingColor = pageElement.elementType.heading.parameters[1].textColor.colorValue
+                            string += 'color:' + headingColor + ';}'
+                            print('color ' + headingColor)
+                        elif pageElement.elementType.heading.parameters[1].backgroundColor is not None:
+                            backgroundColor = pageElement.elementType.heading.parameters[1].backgroundColor.colorValue
+                            string += 'background-color:' + backgroundColor + ';}'
+                string += '</style>'
+                string += '</head>'
+                string += '<body>'
                 if pageElement.elementType.heading is not None:
                     level = str(pageElement.elementType.heading.level)
                     print(level)

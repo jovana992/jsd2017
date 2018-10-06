@@ -1,9 +1,9 @@
 page "Registracija korisnika" {
-    Heading (level = 1, text = "Forma za registraciju")
-    Paragraph (text = "Molimo Vas da popunite sledeca polja.")
+    Heading (level = 1, text = "Forma za registraciju", textColor = red)
+    Paragraph (text = "Molimo Vas da popunite sledeca polja.", textColor = black)
 };
 
 page "TV Prodaja" {
-    Heading (level = 2, text = "Najveca ponuda na trzistu")
+    Heading (level = 2, text = "Najveca ponuda na trzistu", backgroundColor = blue)
     Paragraph (text = "Dodavanje u korpu se vrsi klikom na zeljeni artikal.")
 };
