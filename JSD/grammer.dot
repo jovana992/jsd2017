@@ -11,36 +11,51 @@
     edge[dir=black,arrowtail=empty]
 
 
-2507424439560 -> 2507424429176[arrowtail=diamond, dir=both, headlabel="models 0..*"]
-2507424439560[ label="{Models|}"]
+1345889640920 -> 1345889635256[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+1345889640920[ label="{Models|}"]
 
-2507424429176 -> 2507424428232[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
-2507424429176[ label="{Model|+name:ID\l}"]
+1345889635256 -> 1345889643752[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
+1345889635256[ label="{Model|+name:ID\l}"]
 
-2507424428232[ label="{ModelElement|+name:ID\l}"]
+1345889643752 -> 1345889638088[arrowtail=diamond, dir=both, headlabel="elementType "]
+1345889643752[ label="{ModelElement|+name:ID\l}"]
 
-2507414462008[ label="{ID|}"]
+1345889638088[ label="{ElementType|+charField:CharField\l+emailField:EmailField\l+foreignKey:ForeignKey\l+dateTimeField:DateTimeField\l+integerField:IntegerField\l+booleanField:BooleanField\l}"]
 
-2507414465784[ label="{STRING|}"]
+1345889649416[ label="{CharField|CharField ( )}"]
 
-2507414473336[ label="{BOOL|}"]
+1345889658856[ label="{EmailField|EmailField ( )}"]
 
-2507414479000[ label="{INT|}"]
+1345889660744[ label="{ForeignKey|ForeignKey ( )}"]
 
-2507414478056[ label="{FLOAT|}"]
+1345889680568[ label="{DateTimeField|DateTimeField ( )}"]
 
-2507424433896[ label="{NUMBER|}"]
-2507424433896 -> 2507414478056 [dir=back]
-2507424433896 -> 2507414479000 [dir=back]
+1345889679624[ label="{IntegerField|IntegerField ( )}"]
 
-2507424441448[ label="{BASETYPE|}"]
-2507424441448 -> 2507424433896 [dir=back]
-2507424441448 -> 2507414473336 [dir=back]
-2507424441448 -> 2507414462008 [dir=back]
-2507424441448 -> 2507414465784 [dir=back]
+1345889681512[ label="{BooleanField|BooleanField ( )}"]
 
-2507424453720[ label="{*OBJECT|}"]
-2507424453720 -> 2507424441448 [dir=back]
+1345889633368[ label="{ID|}"]
+
+1345889634312[ label="{STRING|}"]
+
+1345889604104[ label="{BOOL|}"]
+
+1345889636200[ label="{INT|}"]
+
+1345889651304[ label="{FLOAT|}"]
+
+1345889652248[ label="{NUMBER|}"]
+1345889652248 -> 1345889651304 [dir=back]
+1345889652248 -> 1345889636200 [dir=back]
+
+1345889655080[ label="{BASETYPE|}"]
+1345889655080 -> 1345889652248 [dir=back]
+1345889655080 -> 1345889604104 [dir=back]
+1345889655080 -> 1345889633368 [dir=back]
+1345889655080 -> 1345889634312 [dir=back]
+
+1345889641864[ label="{*OBJECT|}"]
+1345889641864 -> 1345889655080 [dir=back]
 
 
 }

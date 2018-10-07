@@ -1,13 +1,15 @@
 model Korisnik {
-    ime
-    prezime
-    adresa
-    jmbg
-    email
+    agencija = ForeignKey()
+    ime = CharField()
+    prezime = CharField()
+    adresa = CharField()
+    jmbg = IntegerField()
+    email = EmailField()
+    pol = BooleanField()
 };
 
 model Agencija {
-    naziv
-    adresa
-    telefon
+    naziv = CharField()
+    adresa = CharField()
+    telefon = IntegerField()
 };

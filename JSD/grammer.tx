@@ -9,7 +9,35 @@ Model:
 ;
 
 ModelElement:
-    name = ID
+    name = ID '=' elementType = ElementType
+;
+
+ElementType:
+    charField = CharField | emailField = EmailField | foreignKey = ForeignKey | dateTimeField = DateTimeField | integerField = IntegerField | booleanField = BooleanField
+;
+
+CharField:
+    'CharField' '('')'
+;
+
+EmailField:
+    'EmailField' '('')'
+;
+
+ForeignKey:
+    'ForeignKey' '('')'
+;
+
+DateTimeField:
+    'DateTimeField' '('')'
+;
+
+IntegerField:
+    'IntegerField' '('')'
+;
+
+BooleanField:
+    'BooleanField' '('')'
 ;
 
 

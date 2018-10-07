@@ -81,6 +81,19 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             for modelElement in model['modelElements']:
                 string += '\n\t\t\t\t(' + "'"
                 string += modelElement.name + "'," + "models."
+
+                if modelElement.elementType.foreignKey is not None:
+                    string += 'ForeignKey()'
+                elif modelElement.elementType.charField is not None:
+                    string += 'CharField' + "()"
+                elif modelElement.elementType.emailField is not None:
+                    string += 'EmailField' + "()"
+                elif modelElement.elementType.dateTimeField is not None:
+                    string += 'DateTimeField' + "()"
+                elif modelElement.elementType.integerField is not None:
+                    string += 'IntegerField' + "()"
+                elif modelElement.elementType.booleanField is not None:
+                    string += 'BooleanField' + "()"
                 string += "),"
             string += '\n\t\t\t],'
             string += '\n\t\t),'
@@ -101,6 +114,18 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                 string += '\n\t'
                 string += modelElement.name + "=" + "models."
 
+                if modelElement.elementType.foreignKey is not None:
+                    string += 'ForeignKey()'
+                elif modelElement.elementType.charField is not None:
+                    string += 'CharField' + "()"
+                elif modelElement.elementType.emailField is not None:
+                    string += 'EmailField' + "()"
+                elif modelElement.elementType.dateTimeField is not None:
+                    string += 'DateTimeField' + "()"
+                elif modelElement.elementType.integerField is not None:
+                    string += 'IntegerField' + "()"
+                elif modelElement.elementType.booleanField is not None:
+                    string += 'BooleanField' + "()"
             string += '\n\n\t'
             string += "'''"
             string += '\n\tYou can chose one of these atributes to be returned instead of type object!'
