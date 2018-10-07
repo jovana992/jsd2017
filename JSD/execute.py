@@ -49,69 +49,150 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
     query_set = proba.interpreter(model)'''
 
     print('ICF')
-    print(model.pages[0].title)
+    print(model.models[0].name)
 
-    pages = model.pages
-    pages1 = []
-    for page in pages:
-        pageElements = page.pageElements
+    models = model.models
+    models1 = []
+    for model in models:
+        # pageElements = page.pageElements
         dict = {}
-        dict['page'] = page.title
-        dict['pageElements'] = pageElements
+        dict['model'] = model.name
+        # dict['pageElements'] = pageElements
         print(dict)
-        pages1.append(dict)
+        models1.append(dict)
 
-    print(pages1)
-    #Generator html stranice
+    print(models1)
 
-    def test(page):
-        # for page in pages:
-            string = '<!DOCTYPE html>\n'
-            string += '<html>\n'
-            for pageElement in page['pageElements']:
-                string += '<head>\n'
-                string += '<title>' + str(page['page']) + '</title>\n'
-                string += '<style>'
-                if pageElement.elementType.heading is not None:
-                    level = str(pageElement.elementType.heading.level)
-                    string += 'h' + level + '{'
-                    numberOfHeadingParameters = len(pageElement.elementType.heading.parameters)
-                    print('br parametara ' + str(numberOfHeadingParameters))
-                    if numberOfHeadingParameters == 0 or numberOfHeadingParameters == 1:
-                        string += '}'
-                    elif numberOfHeadingParameters == 2:
-                        if pageElement.elementType.heading.parameters[1].textColor is not None:
-                            headingColor = pageElement.elementType.heading.parameters[1].textColor.colorValue
-                            string += 'color:' + headingColor + ';}'
-                            print('color ' + headingColor)
-                        elif pageElement.elementType.heading.parameters[1].backgroundColor is not None:
-                            backgroundColor = pageElement.elementType.heading.parameters[1].backgroundColor.colorValue
-                            string += 'background-color:' + backgroundColor + ';}'
-                string += '</style>'
-                string += '</head>'
-                string += '<body>'
-                if pageElement.elementType.heading is not None:
-                    level = str(pageElement.elementType.heading.level)
-                    print(level)
-                    string += '<h' + level + '>'
-                    headText = pageElement.elementType.heading.parameters[0].text.content
-                    print(headText)
-                    if headText is not None:
-                        string += headText
-                        string += '</h' + level + '>'
+    # Kreiranje generated deirektorojuma
+    newpath = r'E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/'
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
 
-                if pageElement.elementType.paragraph is not None:
-                    parText = pageElement.elementType.paragraph.parameters[0].text.content
-                    print(parText)
-                    string += '<p>' + parText + '</p>'
-                    string += '/<body>'
-                    string += '/<html>'
+    #Generator koda za initial.py
 
-                    return string
+    def test(models):
+        string = 'from __future__ import unicode_literals\nfrom django.db import migrations, models\nimport django.db.models.deletion\nimport django.utils.timezone\n\n\nclass Migration(migrations.Migration):\n\n\tinitial = True\n\n\tdependencies = [\n\t]\n\n\toperations = ['
+        for model in models:
+            string += '\n\t\t'
+            string += 'migrations.CreateModel('
+            string += '\n\t\t\tname=' + "'" + str(model['model']) + "',"
+            string += '),'
+        string += '\n\t]'
+        return string
 
-    for page in pages1:
-        with open('E:/Jovana/Desktop/test/' + str(page['page']) + '.html', 'w') as f:
-            a = test(page)
-            # a = model.pages[0].title
-            f.write(a)
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/initial.py', 'w') as f:
+        a = test(models1)
+        f.write(a)
+
+    # Generator koda za models.py
+    def test1(models):
+        string = 'import os\nfrom django.db import models\nfrom django.utils import timezone'
+        for model in models:
+            string += '\n\nclass '
+            string += str(model['model']) + "(" + 'models.Model' + "):"
+
+            string += '\n\n\t'
+        return string
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/models.py', 'w') as f:
+        a = test1(models1)
+        f.write(a)
+
+    # Generator koda za views.py
+    def test2(models):
+        string = 'from django.views import generic\nfrom django.views.generic.edit import CreateView, UpdateView, DeleteView\nfrom django.urls import reverse_lazy, reverse\n'
+        for model in models:
+            string += '\n'
+            string += 'from .models import ' + str(model['model'])
+        for model in models:
+            # CreateView generator
+            string += '\n\n'
+            string += '#Create view for ' + str(model['model']) + ' model.\n'
+            string += 'class ' + str(model['model']) + 'CreateView' + '(CreateView):'
+            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
+            string += '\n\tmodel=' + str(model['model'])
+
+            # DeleteView generator
+            string += '\n\n'
+            string += '#Delete view for ' + str(model['model']) + ' model.\n'
+            string += 'class ' + str(model['model']) + 'DeleteView' + '(DeleteView):'
+            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
+            string += '\n\tmodel=' + str(model['model'])
+            string += '\n\tsuccess_url=reverse_lazy(' + "'" + "'" + ")"
+
+            # ListView generator
+            string += '\n\n'
+            string += '#List view for ' + str(model['model']) + ' model.\n'
+            string += 'class ' + str(model['model']) + 'ListView' + '(generic.ListView):'
+            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
+            string += '\n\tcontext_object_name=' + "'" + 'all_' + str(model['model']) + "'"
+            string += '\n\tdef get_queryset(self):'
+            string += '\n\t\treturn ' + str(model['model']) + '.object.all'
+
+        return string
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/views.py', 'w') as f:
+        a = test2(models1)
+        f.write(a)
+
+    # Generator koda za urls.py u okviru aplikacije
+    def test3(models):
+        string = 'from django.conf.urls import url\nfrom . import views\n'
+        string += '\n' + 'app_name = ' + "'" + 'myapp' + "'"
+        string += '\n\nurlspaterns = [' + '\n\n' + ']'
+
+        return string
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/urls.py', 'w') as f:
+        a = test3(models1)
+        f.write(a)
+
+    # Generator koda za admin.py
+    def test4(models):
+        string = 'from django.contrib import admin\nfrom .models import '
+        last = len(models) - 1
+        for i, model in enumerate(models):
+            string += str(model['model'])
+            if i == last:
+                string += '' + '\n'
+            else:
+                string += ', '
+        for model in models:
+            string += '\n'
+            string += 'admin.site.register(' + str(model['model']) + ')'
+
+        return string
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/admin.py', 'w') as f:
+        a = test4(models1)
+        f.write(a)
+
+    def test5(models):
+        string = '"""prject URL Configuration\n\n'
+        string += 'The `urlpatterns` list routes URLs to views. For more information please see:\n\t'
+        string += 'The `urlpatterns` list routes URLs to views. For more information please see:\n'
+        string += 'Examples:\n'
+        string += 'Function views\n\t'
+        string += '1. Add an import:  from my_app import views\n\t'
+        string += '2. Add a URL to urlpatterns:  url(r' + "'" + '^$' + "'" +', views.home, name=' + "'" + 'home' + "'" + ')\n'
+        string += 'Class-based views\n\t'
+        string += '1. Add an import:  from other_app.views import Home\n\t'
+        string += '2. Add a URL to urlpatterns:  url(r' + "'" + '^$' + "'" + ', Home.as_view(), name=' + "'" + 'home' + "'" + ')\n'
+        string += 'Including another URLconf\n\t'
+        string += '1. Import the include() function: from django.conf.urls import url, include\n\t'
+        string += '2. Add a URL to urlpatterns:  url(r' + "'" '^blog/' + "'" + ', include(' + "'" + 'blog.urls' + "'" + '))\n'
+        string += '"""\n'
+        string += 'from django.conf.urls import include, url\n'
+        string += 'from django.contrib import admin\n\n'
+        string += 'urlpatterns = [\n\t'
+        string += 'url(r' + "'" + '^admin/' + "', " + 'admin.site.urls),\n\t'
+        string += 'url(r' + "'" + '^myapp/' + "', " + 'include(' + "'myapp.urls'" + ')),\n'
+        string += ']'
+
+        return string
+
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/urls.py', 'w') as f:
+        a = test5(models1)
+        f.write(a)
 

@@ -1,46 +1,10 @@
-Pages:
-    pages *= Page
+Models:
+    models *= Model
 ;
 
-Page:
-    'page' title = STRING '{'
-    pageElements *= PageElement
+Model:
+    'model' name = ID '{'
     '}'';'
 ;
 
-PageElement:
-    elementType = ElementType
-;
-
-ElementType:
-    heading = Heading | paragraph = Paragraph
-;
-
-Heading:
-    'Heading' '(''level' '=' level = INT ',' parameters *= Parameters[',']')'
-;
-
-Paragraph:
-    'Paragraph' '(' parameters *= Parameters[','] ')'
-;
-
-Parameters:
-    text = Text | textColor = TextColor | backgroundColor = BackgroundColor
-;
-
-Text:
-    'text' '=' content = STRING
-;
-
-TextColor:
-    'textColor' '=' colorValue = ColorValue
-;
-
-BackgroundColor:
-    'backgroundColor' '=' colorValue = ColorValue
-;
-
-ColorValue:
-    'red' | 'blue' | 'yellow' | 'black' | 'white'
-;
 

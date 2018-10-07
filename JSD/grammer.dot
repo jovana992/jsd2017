@@ -11,60 +11,33 @@
     edge[dir=black,arrowtail=empty]
 
 
-1487401569576 -> 1487401601672[arrowtail=diamond, dir=both, headlabel="pages 0..*"]
-1487401569576[ label="{Pages|}"]
+2859254368888 -> 2859254372664[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+2859254368888[ label="{Models|}"]
 
-1487401601672 -> 1487401593176[arrowtail=diamond, dir=both, headlabel="pageElements 0..*"]
-1487401601672[ label="{Page|+title:STRING\l}"]
+2859254372664[ label="{Model|+name:ID\l}"]
 
-1487401593176 -> 1487401597896[arrowtail=diamond, dir=both, headlabel="elementType "]
-1487401593176[ label="{PageElement|}"]
+2859254337736[ label="{ID|}"]
 
-1487401597896 -> 1487401570520[arrowtail=diamond, dir=both, headlabel="heading "]
-1487401597896 -> 1487401579016[arrowtail=diamond, dir=both, headlabel="paragraph "]
-1487401597896[ label="{ElementType|}"]
+2859254367944[ label="{STRING|}"]
 
-1487401570520 -> 1487401603560[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-1487401570520[ label="{Heading|+level:INT\l}"]
+2859254336792[ label="{BOOL|}"]
 
-1487401579016 -> 1487401603560[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-1487401579016[ label="{Paragraph|}"]
+2859254377384[ label="{INT|}"]
 
-1487401603560 -> 1487401573352[arrowtail=diamond, dir=both, headlabel="text "]
-1487401603560 -> 1487401596952[arrowtail=diamond, dir=both, headlabel="textColor "]
-1487401603560 -> 1487401602616[arrowtail=diamond, dir=both, headlabel="backgroundColor "]
-1487401603560[ label="{Parameters|}"]
+2859254391544[ label="{FLOAT|}"]
 
-1487401573352[ label="{Text|+content:STRING\l}"]
+2859254380216[ label="{NUMBER|}"]
+2859254380216 -> 2859254391544 [dir=back]
+2859254380216 -> 2859254377384 [dir=back]
 
-1487401596952[ label="{TextColor|+colorValue:ColorValue\l}"]
+2859254388712[ label="{BASETYPE|}"]
+2859254388712 -> 2859254380216 [dir=back]
+2859254388712 -> 2859254336792 [dir=back]
+2859254388712 -> 2859254337736 [dir=back]
+2859254388712 -> 2859254367944 [dir=back]
 
-1487401602616[ label="{BackgroundColor|+colorValue:ColorValue\l}"]
-
-1487401575240[ label="{ColorValue|red\|blue\|yellow\|black\|white}"]
-
-1487400680696[ label="{ID|}"]
-
-1487401589400[ label="{STRING|}"]
-
-1487401595064[ label="{BOOL|}"]
-
-1487401571464[ label="{INT|}"]
-
-1487401587512[ label="{FLOAT|}"]
-
-1487401600728[ label="{NUMBER|}"]
-1487401600728 -> 1487401587512 [dir=back]
-1487401600728 -> 1487401571464 [dir=back]
-
-1487401585624[ label="{BASETYPE|}"]
-1487401585624 -> 1487401600728 [dir=back]
-1487401585624 -> 1487401595064 [dir=back]
-1487401585624 -> 1487400680696 [dir=back]
-1487401585624 -> 1487401589400 [dir=back]
-
-1487401580904[ label="{*OBJECT|}"]
-1487401580904 -> 1487401585624 [dir=back]
+2859254383992[ label="{*OBJECT|}"]
+2859254383992 -> 2859254388712 [dir=back]
 
 
 }
