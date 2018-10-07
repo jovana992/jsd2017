@@ -25,7 +25,11 @@ EmailField:
 ;
 
 ForeignKey:
-    'ForeignKey' '(' parameters *= Parameters[','] ')'
+    'ForeignKey' '(' 'model' '=' className = ClassName ',' parameters *= Parameters[','] ')'
+;
+
+ClassName:
+    ID
 ;
 
 DateTimeField:
@@ -51,4 +55,3 @@ MaxLength:
 Number:
     /[0-9]+/
 ;
-

@@ -1,5 +1,11 @@
+model Agencija {
+    naziv = CharField(max_length = 100)
+    adresa = CharField(max_length = 50)
+    telefon = IntegerField()
+};
+
 model Korisnik {
-    agencija = ForeignKey()
+    agencija = ForeignKey(model = Agencija,)
     ime = CharField(max_length = 10)
     prezime = CharField(max_length = 15)
     adresa = CharField(max_length = 50)
@@ -8,8 +14,4 @@ model Korisnik {
     pol = BooleanField()
 };
 
-model Agencija {
-    naziv = CharField(max_length = 100)
-    adresa = CharField(max_length = 50)
-    telefon = IntegerField()
-};
+

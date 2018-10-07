@@ -83,8 +83,8 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                 string += modelElement.name + "'," + "models."
                 endElement = ")),"
                 if modelElement.elementType.foreignKey is not None:
-                    string += 'ForeignKey()),'
-
+                    string += 'ForeignKey('
+                    string += 'to=' + "'" + 'myapp.' + modelElement.elementType.foreignKey.className + "'" + endElement
                 elif modelElement.elementType.charField is not None:
                     numOfCharParameters = len(modelElement.elementType.charField.parameters)
                     string += 'CharField' + "("
@@ -148,8 +148,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                 string += modelElement.name + "=" + "models."
                 endElement = ")"
                 if modelElement.elementType.foreignKey is not None:
-                    string += 'ForeignKey()'
-
+                    string += 'ForeignKey(' + modelElement.elementType.foreignKey.className + endElement
                 elif modelElement.elementType.charField is not None:
                     numOfCharParameters = len(modelElement.elementType.charField.parameters)
                     string += 'CharField' + "("
