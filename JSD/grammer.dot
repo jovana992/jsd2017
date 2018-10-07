@@ -11,72 +11,90 @@
     edge[dir=black,arrowtail=empty]
 
 
-2284987379624 -> 2284987355080[arrowtail=diamond, dir=both, headlabel="models 0..*"]
-2284987379624[ label="{Models|}"]
+1741456074136 -> 1741456093960[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+1741456074136[ label="{Models|}"]
 
-2284987355080 -> 2284987370184[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
-2284987355080[ label="{Model|+name:ID\l}"]
+1741456093960 -> 1741456076968[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
+1741456093960[ label="{Model|+name:ID\l}"]
 
-2284987370184 -> 2284987353192[arrowtail=diamond, dir=both, headlabel="elementType "]
-2284987370184[ label="{ModelElement|+name:ID\l}"]
+1741456076968 -> 1741456078856[arrowtail=diamond, dir=both, headlabel="elementType "]
+1741456076968[ label="{ModelElement|+name:ID\l}"]
 
-2284987353192 -> 2284987373016[arrowtail=diamond, dir=both, headlabel="charField "]
-2284987353192 -> 2284987362632[arrowtail=diamond, dir=both, headlabel="emailField "]
-2284987353192 -> 2284987352248[arrowtail=diamond, dir=both, headlabel="foreignKey "]
-2284987353192 -> 2284987369240[arrowtail=diamond, dir=both, headlabel="dateTimeField "]
-2284987353192 -> 2284987388120[arrowtail=diamond, dir=both, headlabel="integerField "]
-2284987353192 -> 2284987357912[arrowtail=diamond, dir=both, headlabel="booleanField "]
-2284987353192[ label="{ElementType|}"]
+1741456078856 -> 1741456083576[arrowtail=diamond, dir=both, headlabel="charField "]
+1741456078856 -> 1741456081688[arrowtail=diamond, dir=both, headlabel="emailField "]
+1741456078856 -> 1741456089240[arrowtail=diamond, dir=both, headlabel="foreignKey "]
+1741456078856 -> 1741456102456[arrowtail=diamond, dir=both, headlabel="dateTimeField "]
+1741456078856 -> 1741456106232[arrowtail=diamond, dir=both, headlabel="integerField "]
+1741456078856 -> 1741456128888[arrowtail=diamond, dir=both, headlabel="booleanField "]
+1741456078856[ label="{ElementType|}"]
 
-2284987373016 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987373016[ label="{CharField|}"]
+1741456083576 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456083576[ label="{CharField|}"]
 
-2284987362632 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987362632[ label="{EmailField|}"]
+1741456081688 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456081688[ label="{EmailField|}"]
 
-2284987352248 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987352248[ label="{ForeignKey|+className:ClassName\l}"]
+1741456089240 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456089240[ label="{ForeignKey|+className:ClassName\l}"]
 
-2284987385288[ label="{ClassName|ID}"]
+1741456097736[ label="{ClassName|ID}"]
 
-2284987369240 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987369240[ label="{DateTimeField|}"]
+1741456102456 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456102456[ label="{DateTimeField|}"]
 
-2284987388120 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987388120[ label="{IntegerField|}"]
+1741456106232 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456106232[ label="{IntegerField|}"]
 
-2284987357912 -> 2284987367352[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2284987357912[ label="{BooleanField|}"]
+1741456128888 -> 1741456086408[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1741456128888[ label="{BooleanField|}"]
 
-2284987367352 -> 2284987363576[arrowtail=diamond, dir=both, headlabel="max_length "]
-2284987367352[ label="{Parameters|}"]
+1741456086408 -> 1741456096792[arrowtail=diamond, dir=both, headlabel="max_length "]
+1741456086408 -> 1741456079800[arrowtail=diamond, dir=both, headlabel="null "]
+1741456086408 -> 1741456107176[arrowtail=diamond, dir=both, headlabel="default "]
+1741456086408 -> 1741456115672[arrowtail=diamond, dir=both, headlabel="blank "]
+1741456086408[ label="{Parameters|+on_delete:OnDelete\l}"]
 
-2284987363576[ label="{MaxLength|+number:Number\l}"]
+1741456096792[ label="{MaxLength|+number:Number\l}"]
 
-2284987392840[ label="{Number|[0-9]+}"]
+1741456107176 -> 1741456118504[arrowtail=diamond, dir=both, headlabel="timezone "]
+1741456107176[ label="{Default|+number:Number\l}"]
 
-2284977479432[ label="{ID|}"]
+1741456077912[ label="{Number|[0-9]+}"]
 
-2284977471880[ label="{STRING|}"]
+1741456079800[ label="{Null|+booleanValue:BooleanValue\l}"]
 
-2284977474712[ label="{BOOL|}"]
+1741456115672[ label="{Blank|+booleanValue:BooleanValue\l}"]
 
-2284977482264[ label="{INT|}"]
+1741456113784[ label="{BooleanValue|True\|False}"]
 
-2284977484152[ label="{FLOAT|}"]
+1741456118504[ label="{Timezone|+var:Var\l}"]
 
-2284987368296[ label="{NUMBER|}"]
-2284987368296 -> 2284977484152 [dir=back]
-2284987368296 -> 2284977482264 [dir=back]
+1741456120392[ label="{Var|now\|datetime.year\|datetime.month\|datetime.day\|datetime.hour}"]
 
-2284987378680[ label="{BASETYPE|}"]
-2284987378680 -> 2284987368296 [dir=back]
-2284987378680 -> 2284977474712 [dir=back]
-2284987378680 -> 2284977479432 [dir=back]
-2284987378680 -> 2284977471880 [dir=back]
+1741456121336[ label="{OnDelete|on_delete = models.CASCADE}"]
 
-2284987359800[ label="{*OBJECT|}"]
-2284987359800 -> 2284987378680 [dir=back]
+1741455293000[ label="{ID|}"]
+
+1741456199688[ label="{STRING|}"]
+
+1741456196856[ label="{BOOL|}"]
+
+1741456197800[ label="{INT|}"]
+
+1741456200632[ label="{FLOAT|}"]
+
+1741456093016[ label="{NUMBER|}"]
+1741456093016 -> 1741456200632 [dir=back]
+1741456093016 -> 1741456197800 [dir=back]
+
+1741456082632[ label="{BASETYPE|}"]
+1741456082632 -> 1741456093016 [dir=back]
+1741456082632 -> 1741456196856 [dir=back]
+1741456082632 -> 1741455293000 [dir=back]
+1741456082632 -> 1741456199688 [dir=back]
+
+1741456076024[ label="{*OBJECT|}"]
+1741456076024 -> 1741456082632 [dir=back]
 
 
 }

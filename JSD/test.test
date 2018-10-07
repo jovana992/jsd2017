@@ -5,7 +5,7 @@ model Agencija {
 };
 
 model Korisnik {
-    agencija = ForeignKey(model = Agencija,)
+    agencija = ForeignKey(model = Agencija, on_delete = models.CASCADE)
     ime = CharField(max_length = 10)
     prezime = CharField(max_length = 15)
     adresa = CharField(max_length = 50)
