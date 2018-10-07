@@ -81,20 +81,53 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             for modelElement in model['modelElements']:
                 string += '\n\t\t\t\t(' + "'"
                 string += modelElement.name + "'," + "models."
-
+                endElement = ")),"
                 if modelElement.elementType.foreignKey is not None:
-                    string += 'ForeignKey()'
+                    string += 'ForeignKey()),'
+
                 elif modelElement.elementType.charField is not None:
-                    string += 'CharField' + "()"
+                    numOfCharParameters = len(modelElement.elementType.charField.parameters)
+                    string += 'CharField' + "("
+                    if numOfCharParameters == 0:
+                        string += endElement
+                    elif numOfCharParameters == 1:
+                        maxLengthParameter = modelElement.elementType.charField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.emailField is not None:
-                    string += 'EmailField' + "()"
+                    numOfEmailParameters = len(modelElement.elementType.emailField.parameters)
+                    string += 'EmailField' + "("
+                    if numOfEmailParameters == 0:
+                        string += endElement
+                    elif numOfEmailParameters == 1:
+                        maxLengthParameter = modelElement.elementType.emailField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.dateTimeField is not None:
-                    string += 'DateTimeField' + "()"
+                    numOfDateParameters = len(modelElement.elementType.dateTimeField.parameters)
+                    string += 'DateTimeField' + "("
+                    if numOfDateParameters == 0:
+                        string += endElement
+                    elif numOfDateParameters == 1:
+                        maxLengthParameter = modelElement.elementType.dateTimeField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.integerField is not None:
-                    string += 'IntegerField' + "()"
+                    numOfIntegerParameters = len(modelElement.elementType.integerField.parameters)
+                    string += 'IntegerField' + "("
+                    if numOfIntegerParameters == 0:
+                        string += endElement
+                    elif numOfIntegerParameters == 1:
+                        maxLengthParameter = modelElement.elementType.integerField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.booleanField is not None:
-                    string += 'BooleanField' + "()"
-                string += "),"
+                    string += 'BooleanField' + "()),"
+
             string += '\n\t\t\t],'
             string += '\n\t\t),'
         string += '\n\t]'
@@ -113,17 +146,49 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             for modelElement in model['modelElements']:
                 string += '\n\t'
                 string += modelElement.name + "=" + "models."
-
+                endElement = ")"
                 if modelElement.elementType.foreignKey is not None:
                     string += 'ForeignKey()'
+
                 elif modelElement.elementType.charField is not None:
-                    string += 'CharField' + "()"
+                    numOfCharParameters = len(modelElement.elementType.charField.parameters)
+                    string += 'CharField' + "("
+                    if numOfCharParameters == 0:
+                        string += endElement
+                    elif numOfCharParameters == 1:
+                        maxLengthParameter = modelElement.elementType.charField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.emailField is not None:
-                    string += 'EmailField' + "()"
+                    numOfEmailParameters = len(modelElement.elementType.emailField.parameters)
+                    string += 'EmailField' + "("
+                    if numOfEmailParameters == 0:
+                        string += endElement
+                    elif numOfEmailParameters == 1:
+                        maxLengthParameter = modelElement.elementType.emailField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.dateTimeField is not None:
-                    string += 'DateTimeField' + "()"
+                    numOfDateParameters = len(modelElement.elementType.dateTimeField.parameters)
+                    string += 'DateTimeField' + "("
+                    if numOfDateParameters == 0:
+                        string += endElement
+                    elif numOfDateParameters == 1:
+                        maxLengthParameter = modelElement.elementType.dateTimeField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
+
                 elif modelElement.elementType.integerField is not None:
-                    string += 'IntegerField' + "()"
+                    numOfIntegerParameters = len(modelElement.elementType.integerField.parameters)
+                    string += 'IntegerField' + "("
+                    if numOfIntegerParameters == 0:
+                        string += endElement
+                    elif numOfIntegerParameters == 1:
+                        maxLengthParameter = modelElement.elementType.integerField.parameters[0].max_length
+                        if maxLengthParameter is not None:
+                            string += 'max_length=' + maxLengthParameter.number + endElement
                 elif modelElement.elementType.booleanField is not None:
                     string += 'BooleanField' + "()"
             string += '\n\n\t'

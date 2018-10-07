@@ -17,27 +17,38 @@ ElementType:
 ;
 
 CharField:
-    'CharField' '('')'
+    'CharField' '(' parameters *= Parameters[','] ')'
 ;
 
 EmailField:
-    'EmailField' '('')'
+    'EmailField' '(' parameters *= Parameters[','] ')'
 ;
 
 ForeignKey:
-    'ForeignKey' '('')'
+    'ForeignKey' '(' parameters *= Parameters[','] ')'
 ;
 
 DateTimeField:
-    'DateTimeField' '('')'
+    'DateTimeField' '(' parameters *= Parameters[','] ')'
 ;
 
 IntegerField:
-    'IntegerField' '('')'
+    'IntegerField' '(' parameters *= Parameters[','] ')'
 ;
 
 BooleanField:
-    'BooleanField' '('')'
+    'BooleanField' '(' parameters *= Parameters[','] ')'
 ;
 
+Parameters:
+    max_length = MaxLength
+;
+
+MaxLength:
+    'max_length' '=' number = Number
+;
+
+Number:
+    /[0-9]+/
+;
 

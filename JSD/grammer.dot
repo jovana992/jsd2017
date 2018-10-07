@@ -11,51 +11,70 @@
     edge[dir=black,arrowtail=empty]
 
 
-1345889640920 -> 1345889635256[arrowtail=diamond, dir=both, headlabel="models 0..*"]
-1345889640920[ label="{Models|}"]
+1212403202568 -> 1212403184632[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+1212403202568[ label="{Models|}"]
 
-1345889635256 -> 1345889643752[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
-1345889635256[ label="{Model|+name:ID\l}"]
+1212403184632 -> 1212403186520[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
+1212403184632[ label="{Model|+name:ID\l}"]
 
-1345889643752 -> 1345889638088[arrowtail=diamond, dir=both, headlabel="elementType "]
-1345889643752[ label="{ModelElement|+name:ID\l}"]
+1212403186520 -> 1212403199736[arrowtail=diamond, dir=both, headlabel="elementType "]
+1212403186520[ label="{ModelElement|+name:ID\l}"]
 
-1345889638088[ label="{ElementType|+charField:CharField\l+emailField:EmailField\l+foreignKey:ForeignKey\l+dateTimeField:DateTimeField\l+integerField:IntegerField\l+booleanField:BooleanField\l}"]
+1212403199736 -> 1212403201624[arrowtail=diamond, dir=both, headlabel="charField "]
+1212403199736 -> 1212403210120[arrowtail=diamond, dir=both, headlabel="emailField "]
+1212403199736 -> 1212403192184[arrowtail=diamond, dir=both, headlabel="foreignKey "]
+1212403199736 -> 1212403206344[arrowtail=diamond, dir=both, headlabel="dateTimeField "]
+1212403199736 -> 1212403211064[arrowtail=diamond, dir=both, headlabel="integerField "]
+1212403199736 -> 1212403235608[arrowtail=diamond, dir=both, headlabel="booleanField "]
+1212403199736[ label="{ElementType|}"]
 
-1345889649416[ label="{CharField|CharField ( )}"]
+1212403201624 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403201624[ label="{CharField|}"]
 
-1345889658856[ label="{EmailField|EmailField ( )}"]
+1212403210120 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403210120[ label="{EmailField|}"]
 
-1345889660744[ label="{ForeignKey|ForeignKey ( )}"]
+1212403192184 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403192184[ label="{ForeignKey|}"]
 
-1345889680568[ label="{DateTimeField|DateTimeField ( )}"]
+1212403206344 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403206344[ label="{DateTimeField|}"]
 
-1345889679624[ label="{IntegerField|IntegerField ( )}"]
+1212403211064 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403211064[ label="{IntegerField|}"]
 
-1345889681512[ label="{BooleanField|BooleanField ( )}"]
+1212403235608 -> 1212403226168[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1212403235608[ label="{BooleanField|}"]
 
-1345889633368[ label="{ID|}"]
+1212403226168 -> 1212403229000[arrowtail=diamond, dir=both, headlabel="max_length "]
+1212403226168[ label="{Parameters|}"]
 
-1345889634312[ label="{STRING|}"]
+1212403229000[ label="{MaxLength|+number:Number\l}"]
 
-1345889604104[ label="{BOOL|}"]
+1212403232776[ label="{Number|[0-9]+}"]
 
-1345889636200[ label="{INT|}"]
+1212402523128[ label="{ID|}"]
 
-1345889651304[ label="{FLOAT|}"]
+1212403208232[ label="{STRING|}"]
 
-1345889652248[ label="{NUMBER|}"]
-1345889652248 -> 1345889651304 [dir=back]
-1345889652248 -> 1345889636200 [dir=back]
+1212403198792[ label="{BOOL|}"]
 
-1345889655080[ label="{BASETYPE|}"]
-1345889655080 -> 1345889652248 [dir=back]
-1345889655080 -> 1345889604104 [dir=back]
-1345889655080 -> 1345889633368 [dir=back]
-1345889655080 -> 1345889634312 [dir=back]
+1212403195016[ label="{INT|}"]
 
-1345889641864[ label="{*OBJECT|}"]
-1345889641864 -> 1345889655080 [dir=back]
+1212403203512[ label="{FLOAT|}"]
+
+1212403180856[ label="{NUMBER|}"]
+1212403180856 -> 1212403203512 [dir=back]
+1212403180856 -> 1212403195016 [dir=back]
+
+1212403182744[ label="{BASETYPE|}"]
+1212403182744 -> 1212403180856 [dir=back]
+1212403182744 -> 1212403198792 [dir=back]
+1212403182744 -> 1212402523128 [dir=back]
+1212403182744 -> 1212403208232 [dir=back]
+
+1212403196904[ label="{*OBJECT|}"]
+1212403196904 -> 1212403182744 [dir=back]
 
 
 }
