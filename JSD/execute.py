@@ -68,6 +68,35 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
     if not os.path.exists(newpath):
         os.makedirs(newpath)
 
+    # Funkcija kojoj se prosledjuje prvi i drugi parametar elementa
+    # prosledjuje se i string koji se vraca na kraju
+    # endElement je string kojim se zavrsava red, oznacava kraj elementa
+    def getStringFor2Parameters(firstParameter, secondParameter, endElement):
+        string = ''
+        # First parameter is max_length
+        if firstParameter.max_length and secondParameter.null is not None:
+            string += 'max_length=' + firstParameter.max_length.number + ", "
+            string += 'null=' + secondParameter.null.booleanValue + endElement
+        elif firstParameter.max_length and secondParameter.default is not None:
+            string += 'max_length=' + firstParameter.max_length.number + ", "
+            string += 'default=' + secondParameter.default.number + endElement
+
+        # First parameter is null
+        elif firstParameter.null and secondParameter.max_length is not None:
+            string += 'null=' + firstParameter.null.booleanValue + ", "
+            string += 'max_length=' + secondParameter.max_length.number + endElement
+        elif firstParameter.null and secondParameter.default is not None:
+            string += 'null=' + firstParameter.null.booleanValue + ","
+            string += 'default=' + secondParameter.default.number + endElement
+
+        # First parameter is default
+        elif firstParameter.default and secondParameter.max_length is not None:
+            string += 'default=' + firstParameter.default.number + ", "
+            string += 'max_length=' + secondParameter.max_length.number + endElement
+        elif firstParameter.default and secondParameter.null is not None:
+            string += 'default=' + firstParameter.default.number + ", "
+            string += 'null=' + secondParameter.null.booleanValue + endElement
+        return string
     #Generator koda za initial.py
 
     def test(models):
@@ -107,8 +136,32 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += endElement
                     elif numOfCharParameters == 1:
                         maxLengthParameter = charField.parameters[0].max_length
+                        nullParameter = charField.parameters[0].null
+                        defaultParameter = charField.parameters[0].default
+
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfCharParameters == 3:
+                        maxLengthParameter = charField.parameters[0].max_length
+                        nullParameter = charField.parameters[1].null
+                        defaultParameter = charField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfCharParameters == 2:
+                        firstParameter = charField.parameters[0]
+                        secondParameter = charField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif emailField is not None:
                     numOfEmailParameters = len(emailField.parameters)
@@ -185,8 +238,31 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += endElement
                     elif numOfCharParameters == 1:
                         maxLengthParameter = charField.parameters[0].max_length
+                        nullParameter = charField.parameters[0].null
+                        defaultParameter = charField.parameters[0].default
+
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.number + endElement
+                    elif numOfCharParameters == 3:
+                        maxLengthParameter = charField.parameters[0].max_length
+                        nullParameter = charField.parameters[1].null
+                        defaultParameter = charField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfCharParameters == 2:
+                        firstParameter = charField.parameters[0]
+                        secondParameter = charField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif emailField is not None:
                     numOfEmailParameters = len(emailField.parameters)

@@ -1,14 +1,14 @@
 model Agencija {
-    naziv = CharField(max_length = 100)
-    adresa = CharField(max_length = 50)
+    naziv = CharField(max_length = 100, null = True, default = 1)
+    adresa = CharField(max_length = 50, null = True)
     telefon = IntegerField()
 };
 
 model Korisnik {
     agencija = ForeignKey(model = Agencija, on_delete = models.CASCADE)
-    ime = CharField(max_length = 10)
-    prezime = CharField(max_length = 15)
-    adresa = CharField(max_length = 50)
+    ime = CharField(max_length = 10, null = True, default = 1)
+    prezime = CharField(max_length = 15, null = True)
+    adresa = CharField(max_length = 50, null = True)
     jmbg = IntegerField()
     email = EmailField(max_length = 64)
     pol = BooleanField()
