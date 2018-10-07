@@ -4,7 +4,12 @@ Models:
 
 Model:
     'model' name = ID '{'
+    modelElements *= ModelElement
     '}'';'
+;
+
+ModelElement:
+    name = ID
 ;
 
 

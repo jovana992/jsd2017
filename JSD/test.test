@@ -1,5 +1,13 @@
 model Korisnik {
+    ime
+    prezime
+    adresa
+    jmbg
+    email
 };
 
 model Agencija {
+    naziv
+    adresa
+    telefon
 };

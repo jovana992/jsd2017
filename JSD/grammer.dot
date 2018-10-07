@@ -11,33 +11,36 @@
     edge[dir=black,arrowtail=empty]
 
 
-2859254368888 -> 2859254372664[arrowtail=diamond, dir=both, headlabel="models 0..*"]
-2859254368888[ label="{Models|}"]
+2507424439560 -> 2507424429176[arrowtail=diamond, dir=both, headlabel="models 0..*"]
+2507424439560[ label="{Models|}"]
 
-2859254372664[ label="{Model|+name:ID\l}"]
+2507424429176 -> 2507424428232[arrowtail=diamond, dir=both, headlabel="modelElements 0..*"]
+2507424429176[ label="{Model|+name:ID\l}"]
 
-2859254337736[ label="{ID|}"]
+2507424428232[ label="{ModelElement|+name:ID\l}"]
 
-2859254367944[ label="{STRING|}"]
+2507414462008[ label="{ID|}"]
 
-2859254336792[ label="{BOOL|}"]
+2507414465784[ label="{STRING|}"]
 
-2859254377384[ label="{INT|}"]
+2507414473336[ label="{BOOL|}"]
 
-2859254391544[ label="{FLOAT|}"]
+2507414479000[ label="{INT|}"]
 
-2859254380216[ label="{NUMBER|}"]
-2859254380216 -> 2859254391544 [dir=back]
-2859254380216 -> 2859254377384 [dir=back]
+2507414478056[ label="{FLOAT|}"]
 
-2859254388712[ label="{BASETYPE|}"]
-2859254388712 -> 2859254380216 [dir=back]
-2859254388712 -> 2859254336792 [dir=back]
-2859254388712 -> 2859254337736 [dir=back]
-2859254388712 -> 2859254367944 [dir=back]
+2507424433896[ label="{NUMBER|}"]
+2507424433896 -> 2507414478056 [dir=back]
+2507424433896 -> 2507414479000 [dir=back]
 
-2859254383992[ label="{*OBJECT|}"]
-2859254383992 -> 2859254388712 [dir=back]
+2507424441448[ label="{BASETYPE|}"]
+2507424441448 -> 2507424433896 [dir=back]
+2507424441448 -> 2507414473336 [dir=back]
+2507424441448 -> 2507414462008 [dir=back]
+2507424441448 -> 2507414465784 [dir=back]
+
+2507424453720[ label="{*OBJECT|}"]
+2507424453720 -> 2507424441448 [dir=back]
 
 
 }

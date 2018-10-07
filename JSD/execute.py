@@ -54,10 +54,10 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
     models = model.models
     models1 = []
     for model in models:
-        # pageElements = page.pageElements
+        modelElements = model.modelElements
         dict = {}
         dict['model'] = model.name
-        # dict['pageElements'] = pageElements
+        dict['modelElements'] = modelElements
         print(dict)
         models1.append(dict)
 
@@ -76,7 +76,14 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             string += '\n\t\t'
             string += 'migrations.CreateModel('
             string += '\n\t\t\tname=' + "'" + str(model['model']) + "',"
-            string += '),'
+            string += '\n\t\t\tfields=['
+            string += '\n\t\t\t\t(' + "'id'" + ",models.AutoField" + "(auto_created=True, primary_key=True, serialize=False, verbose_name=" + "'ID')),"
+            for modelElement in model['modelElements']:
+                string += '\n\t\t\t\t(' + "'"
+                string += modelElement.name + "'," + "models."
+                string += "),"
+            string += '\n\t\t\t],'
+            string += '\n\t\t),'
         string += '\n\t]'
         return string
 
@@ -90,8 +97,17 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
         for model in models:
             string += '\n\nclass '
             string += str(model['model']) + "(" + 'models.Model' + "):"
+            for modelElement in model['modelElements']:
+                string += '\n\t'
+                string += modelElement.name + "=" + "models."
 
             string += '\n\n\t'
+            string += "'''"
+            string += '\n\tYou can chose one of these atributes to be returned instead of type object!'
+            string += '\n\tdef __str__(self):'
+            for modelElement in model['modelElements']:
+                string += '\n\t\treturn self.' + modelElement.name
+            string += '\n\t' + "'''"
         return string
 
     with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/models.py', 'w') as f:
@@ -105,12 +121,37 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             string += '\n'
             string += 'from .models import ' + str(model['model'])
         for model in models:
+
             # CreateView generator
             string += '\n\n'
             string += '#Create view for ' + str(model['model']) + ' model.\n'
             string += 'class ' + str(model['model']) + 'CreateView' + '(CreateView):'
             string += '\n\ttemplate_name=' + "'" + '.html' + "'"
             string += '\n\tmodel=' + str(model['model'])
+            string += '\n\tfields=['
+            last = len(model['modelElements']) - 1
+            for i, modelElement in enumerate(model['modelElements']):
+                string += "'" + modelElement.name + "'"
+                if i == last:
+                    string += ']'
+                else:
+                    string += ', '
+            string += '\n\tsuccess_url=reverse_lazy(' + "'" + "'" + ")"
+
+            # UpdateView generator
+            string += '\n\n'
+            string += '#Update view for ' + str(model['model']) + ' model.\n'
+            string += 'class ' + str(model['model']) + 'UpdateView' + '(UpdateView):'
+            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
+            string += '\n\tmodel=' + str(model['model'])
+            string += '\n\tfields=['
+            last = len(model['modelElements']) - 1
+            for i, modelElement in enumerate(model['modelElements']):
+                string += "'" + modelElement.name + "'"
+                if i == last:
+                    string += ']'
+                else:
+                    string += ', '
 
             # DeleteView generator
             string += '\n\n'
