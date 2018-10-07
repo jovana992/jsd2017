@@ -10,7 +10,7 @@ model Korisnik {
     prezime = CharField(max_length = 15, null = True)
     adresa = CharField(max_length = 50, null = True)
     jmbg = IntegerField()
-    email = EmailField(max_length = 64)
+    email = EmailField(max_length = 64, null = False)
     pol = BooleanField()
 };
 
