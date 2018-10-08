@@ -9,7 +9,7 @@ model Korisnik {
     ime = CharField(max_length = 10, null = True, default = 1)
     prezime = CharField(max_length = 15, null = True)
     adresa = CharField(max_length = 50, null = True)
-    datumRodjenja = DateTimeField(null = True)
+    datumRodjenja = DateTimeField(default = timezone.now)
     jmbg = IntegerField(default = 1, null = True)
     email = EmailField(max_length = 64, null = False)
     pol = BooleanField()

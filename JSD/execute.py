@@ -79,7 +79,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             string += 'null=' + secondParameter.null.booleanValue + endElement
         elif firstParameter.max_length and secondParameter.default is not None:
             string += 'max_length=' + firstParameter.max_length.number + ", "
-            string += 'default=' + secondParameter.default.number + endElement
+            string += 'default=' + secondParameter.default.defaultValue.number + endElement
 
         # First parameter is null
         elif firstParameter.null and secondParameter.max_length is not None:
@@ -87,14 +87,14 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
             string += 'max_length=' + secondParameter.max_length.number + endElement
         elif firstParameter.null and secondParameter.default is not None:
             string += 'null=' + firstParameter.null.booleanValue + ","
-            string += 'default=' + secondParameter.default.number + endElement
+            string += 'default=' + secondParameter.default.defaultValue.number + endElement
 
         # First parameter is default
         elif firstParameter.default and secondParameter.max_length is not None:
-            string += 'default=' + firstParameter.default.number + ", "
+            string += 'default=' + firstParameter.default.defaultValue.number + ", "
             string += 'max_length=' + secondParameter.max_length.number + endElement
         elif firstParameter.default and secondParameter.null is not None:
-            string += 'default=' + firstParameter.default.number + ", "
+            string += 'default=' + firstParameter.default.defaultValue.number + ", "
             string += 'null=' + secondParameter.null.booleanValue + endElement
         return string
     #Generator koda za initial.py
@@ -124,7 +124,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     defaultParameter = foreignKey.parameters[0].default
                     onDeleteParameter = foreignKey.parameters[0].on_delete
                     if defaultParameter is not None:
-                        string += 'default=' + defaultParameter.number
+                        string += 'default=' + defaultParameter.defaultValue.number
                     if onDeleteParameter is not None:
                         string += 'on_delete=django.db.models.deletion.CASCADE, '
                     string += 'to=' + "'" + 'myapp.' + foreignKey.className + "'" + endElement
@@ -144,7 +144,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfCharParameters == 3:
                         maxLengthParameter = charField.parameters[0].max_length
@@ -153,7 +153,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfCharParameters == 2:
                         firstParameter = charField.parameters[0]
@@ -180,7 +180,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfEmailParameters == 3:
                         maxLengthParameter = emailField.parameters[0].max_length
@@ -189,7 +189,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.value + endElement
 
                     elif numOfEmailParameters == 2:
                         firstParameter = emailField.parameters[0]
@@ -207,10 +207,14 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
                         nullParameter = dateTimeField.parameters[0].null
+                        defaultParameter = dateTimeField.parameters[0].default
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            print(defaultParameter.defaultValue.timezone.var)
+                            # string += 'default' + defaultParameter.var
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
@@ -301,7 +305,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
                     elif numOfCharParameters == 3:
                         maxLengthParameter = charField.parameters[0].max_length
                         nullParameter = charField.parameters[1].null
@@ -309,7 +313,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfCharParameters == 2:
                         firstParameter = charField.parameters[0]
@@ -336,7 +340,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfEmailParameters == 3:
                         maxLengthParameter = emailField.parameters[0].max_length
@@ -345,7 +349,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfEmailParameters == 2:
                         firstParameter = emailField.parameters[0]
@@ -363,10 +367,13 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
                         nullParameter = dateTimeField.parameters[0].null
+                        defaultParameter = dateTimeField.parameters[0].default
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            print(defaultParameter.defaultValue.timezone.var)
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
@@ -385,7 +392,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfIntegerParameters == 3:
                         maxLengthParameter = integerField.parameters[0].max_length
@@ -394,7 +401,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfIntegerParameters == 2:
                         firstParameter = integerField.parameters[0]

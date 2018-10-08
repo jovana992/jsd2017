@@ -53,7 +53,11 @@ MaxLength:
 ;
 
 Default:
-    'default' '=' number = Number | timezone = Timezone
+    'default' '=' defaultValue = DefaultValue
+;
+
+DefaultValue:
+    number = Number | timezone = Timezone
 ;
 
 Number:
