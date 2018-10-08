@@ -206,18 +206,47 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += endElement
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
+                        nullParameter = dateTimeField.parameters[0].null
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
                     string += 'IntegerField' + "("
+
                     if numOfIntegerParameters == 0:
                         string += endElement
+
                     elif numOfIntegerParameters == 1:
                         maxLengthParameter = integerField.parameters[0].max_length
+                        nullParameter = integerField.parameters[0].null
+                        defaultParameter = integerField.parameters[0].default
+
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfIntegerParameters == 3:
+                        maxLengthParameter = integerField.parameters[0].max_length
+                        nullParameter = integerField.parameters[1].null
+                        defaultParameter = integerField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfIntegerParameters == 2:
+                        firstParameter = integerField.parameters[0]
+                        secondParameter = integerField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif booleanField is not None:
                     string += 'BooleanField' + "()),"
@@ -333,18 +362,47 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += endElement
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
+                        nullParameter = dateTimeField.parameters[0].null
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
                     string += 'IntegerField' + "("
+
                     if numOfIntegerParameters == 0:
                         string += endElement
+
                     elif numOfIntegerParameters == 1:
                         maxLengthParameter = integerField.parameters[0].max_length
+                        nullParameter = integerField.parameters[0].null
+                        defaultParameter = integerField.parameters[0].default
+
                         if maxLengthParameter is not None:
                             string += 'max_length=' + maxLengthParameter.number + endElement
+                        if nullParameter is not None:
+                            string += 'null=' + nullParameter.booleanValue + endElement
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfIntegerParameters == 3:
+                        maxLengthParameter = integerField.parameters[0].max_length
+                        nullParameter = integerField.parameters[1].null
+                        defaultParameter = integerField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=' + defaultParameter.number + endElement
+
+                    elif numOfIntegerParameters == 2:
+                        firstParameter = integerField.parameters[0]
+                        secondParameter = integerField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif booleanField is not None:
                     string += 'BooleanField' + "()"

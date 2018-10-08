@@ -1,7 +1,7 @@
 model Agencija {
     naziv = CharField(max_length = 100, null = True, default = 1)
     adresa = CharField(max_length = 50, null = True)
-    telefon = IntegerField()
+    telefon = IntegerField(max_length = 15, null = True)
 };
 
 model Korisnik {
@@ -9,7 +9,8 @@ model Korisnik {
     ime = CharField(max_length = 10, null = True, default = 1)
     prezime = CharField(max_length = 15, null = True)
     adresa = CharField(max_length = 50, null = True)
-    jmbg = IntegerField()
+    datumRodjenja = DateTimeField(null = True)
+    jmbg = IntegerField(default = 1, null = True)
     email = EmailField(max_length = 64, null = False)
     pol = BooleanField()
 };
