@@ -69,38 +69,59 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
         os.makedirs(newpath)
 
     # Funkcija kojoj se prosledjuje prvi i drugi parametar elementa
-    # prosledjuje se i string koji se vraca na kraju
+    # prosledjuje se i boolean indicator dateTimeField koji ukazuje na to da li je dateTime
+    # (potrebno jer je defaultna vrednost razlicita u tom slucaju)
     # endElement je string kojim se zavrsava red, oznacava kraj elementa
-    def getStringFor2Parameters(firstParameter, secondParameter, endElement):
+    def getStringFor2Parameters(firstParameter, secondParameter, dateTimeField, endElement):
         string = ''
+
         # First parameter is max_length
         if firstParameter.max_length and secondParameter.null is not None:
             string += 'max_length=' + firstParameter.max_length.number + ", "
             string += 'null=' + secondParameter.null.booleanValue + endElement
         elif firstParameter.max_length and secondParameter.default is not None:
             string += 'max_length=' + firstParameter.max_length.number + ", "
-            string += 'default=' + secondParameter.default.defaultValue.number + endElement
+            if not dateTimeField:
+                string += 'default=' + secondParameter.default.defaultValue.number + endElement
+            else:
+                string += 'default=timezone.' + \
+                          secondParameter.default.defaultValue.timezone.var + endElement
 
         # First parameter is null
         elif firstParameter.null and secondParameter.max_length is not None:
             string += 'null=' + firstParameter.null.booleanValue + ", "
             string += 'max_length=' + secondParameter.max_length.number + endElement
         elif firstParameter.null and secondParameter.default is not None:
-            string += 'null=' + firstParameter.null.booleanValue + ","
-            string += 'default=' + secondParameter.default.defaultValue.number + endElement
+            string += 'null=' + firstParameter.null.booleanValue + ", "
+            if not dateTimeField:
+                string += 'default=' + secondParameter.default.defaultValue.number + endElement
+            else:
+                string += 'default=timezone.' + \
+                          secondParameter.default.defaultValue.timezone.var + endElement
 
         # First parameter is default
         elif firstParameter.default and secondParameter.max_length is not None:
-            string += 'default=' + firstParameter.default.defaultValue.number + ", "
+            if not dateTimeField:
+                string += 'default=' + firstParameter.default.defaultValue.number + ", "
+            else:
+                string += 'default=timezone.' + \
+                          firstParameter.default.defaultValue.timezone.var + ", "
+            # string += 'default=' + firstParameter.default.defaultValue.number + ", "
             string += 'max_length=' + secondParameter.max_length.number + endElement
         elif firstParameter.default and secondParameter.null is not None:
-            string += 'default=' + firstParameter.default.defaultValue.number + ", "
+            if not dateTimeField:
+                string += 'default=' + firstParameter.default.defaultValue.number + ", "
+            else:
+                string += 'default=timezone.' + \
+                          firstParameter.default.defaultValue.timezone.var + ", "
+            # string += 'default=' + firstParameter.default.defaultValue.number + ", "
             string += 'null=' + secondParameter.null.booleanValue + endElement
         return string
+
     #Generator koda za initial.py
 
     def test(models):
-        string = 'from __future__ import unicode_literals\nfrom django.db import migrations, models\nimport django.db.models.deletion\nimport django.utils.timezone\n\n\nclass Migration(migrations.Migration):\n\n\tinitial = True\n\n\tdependencies = [\n\t]\n\n\toperations = ['
+        string = 'from __future__ import unicode_literals\nfrom django.db import migrations, models\nimport django.db.models.deletion\nfrom django.utils import timezone\n\n\nclass Migration(migrations.Migration):\n\n\tinitial = True\n\n\tdependencies = [\n\t]\n\n\toperations = ['
         for model in models:
             string += '\n\t\t'
             string += 'migrations.CreateModel('
@@ -119,6 +140,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                 integerField = modelElement.elementType.integerField
                 booleanField = modelElement.elementType.booleanField
 
+                isDateTimeField = False
                 if foreignKey is not None:
                     string += 'ForeignKey('
                     defaultParameter = foreignKey.parameters[0].default
@@ -159,7 +181,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = charField.parameters[0]
                         secondParameter = charField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
@@ -195,15 +217,17 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = emailField.parameters[0]
                         secondParameter = emailField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
                 elif dateTimeField is not None:
                     numOfDateParameters = len(dateTimeField.parameters)
                     string += 'DateTimeField' + "("
+                    isDateTimeField = True
                     if numOfDateParameters == 0:
                         string += endElement
+
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
                         nullParameter = dateTimeField.parameters[0].null
@@ -214,7 +238,27 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
                             print(defaultParameter.defaultValue.timezone.var)
-                            # string += 'default' + defaultParameter.var
+                            string += 'default=timezone.' + \
+                                      defaultParameter.defaultValue.timezone.var + endElement
+
+                    elif numOfDateParameters == 3:
+                        maxLengthParameter = dateTimeField.parameters[0].max_length
+                        nullParameter = dateTimeField.parameters[1].null
+                        defaultParameter = dateTimeField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=timezone.' + \
+                                  defaultParameter.defaultValue.timezone.var + endElement
+
+                    elif numOfDateParameters == 2:
+                        firstParameter = dateTimeField.parameters[0]
+                        secondParameter = dateTimeField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField,
+                                                                    endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
@@ -248,7 +292,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = integerField.parameters[0]
                         secondParameter = integerField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
@@ -282,6 +326,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                 integerField = modelElement.elementType.integerField
                 booleanField = modelElement.elementType.booleanField
 
+                isDateTimeField = False
                 if foreignKey is not None:
                     string += 'ForeignKey(' + foreignKey.className + ', ' + 'on_delete=models.CASCADE'
                     defaultParameter = foreignKey.parameters[0].default
@@ -319,7 +364,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = charField.parameters[0]
                         secondParameter = charField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
@@ -355,15 +400,17 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = emailField.parameters[0]
                         secondParameter = emailField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
                 elif dateTimeField is not None:
                     numOfDateParameters = len(dateTimeField.parameters)
                     string += 'DateTimeField' + "("
+                    isDateTimeField = True
                     if numOfDateParameters == 0:
                         string += endElement
+
                     elif numOfDateParameters == 1:
                         maxLengthParameter = dateTimeField.parameters[0].max_length
                         nullParameter = dateTimeField.parameters[0].null
@@ -374,6 +421,27 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
                             print(defaultParameter.defaultValue.timezone.var)
+                            string += 'default=timezone.' + \
+                                      defaultParameter.defaultValue.timezone.var + endElement
+
+                    elif numOfDateParameters == 3:
+                        maxLengthParameter = dateTimeField.parameters[0].max_length
+                        nullParameter = dateTimeField.parameters[1].null
+                        defaultParameter = dateTimeField.parameters[2].default
+
+                        string += 'max_length=' + maxLengthParameter.number + ", "
+                        string += 'null=' + nullParameter.booleanValue + ", "
+                        string += 'default=timezone.' + \
+                                  defaultParameter.defaultValue.timezone.var + endElement
+
+                    elif numOfDateParameters == 2:
+                        firstParameter = dateTimeField.parameters[0]
+                        secondParameter = dateTimeField.parameters[1]
+
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField,
+                                                                    endElement)
+                        # print(string2Parameters)
+                        string += string2Parameters
 
                 elif integerField is not None:
                     numOfIntegerParameters = len(integerField.parameters)
@@ -407,7 +475,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         firstParameter = integerField.parameters[0]
                         secondParameter = integerField.parameters[1]
 
-                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, endElement)
+                        string2Parameters = getStringFor2Parameters(firstParameter, secondParameter, isDateTimeField, endElement)
                         # print(string2Parameters)
                         string += string2Parameters
 
