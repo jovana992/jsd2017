@@ -211,7 +211,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.defaultValue.value + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfEmailParameters == 2:
                         firstParameter = emailField.parameters[0]
@@ -277,7 +277,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         if nullParameter is not None:
                             string += 'null=' + nullParameter.booleanValue + endElement
                         if defaultParameter is not None:
-                            string += 'default=' + defaultParameter.number + endElement
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfIntegerParameters == 3:
                         maxLengthParameter = integerField.parameters[0].max_length
@@ -286,7 +286,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
 
                         string += 'max_length=' + maxLengthParameter.number + ", "
                         string += 'null=' + nullParameter.booleanValue + ", "
-                        string += 'default=' + defaultParameter.number + endElement
+                        string += 'default=' + defaultParameter.defaultValue.number + endElement
 
                     elif numOfIntegerParameters == 2:
                         firstParameter = integerField.parameters[0]
@@ -297,7 +297,16 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += string2Parameters
 
                 elif booleanField is not None:
-                    string += 'BooleanField' + "()),"
+                    numOfBooleanParameters = len(booleanField.parameters)
+                    string += 'BooleanField' + "("
+
+                    if numOfBooleanParameters == 0:
+                        string += endElement
+
+                    elif numOfBooleanParameters == 1:
+                        defaultParameter = booleanField.parameters[0].default
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
             string += '\n\t\t\t],'
             string += '\n\t\t),'
@@ -331,7 +340,7 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     string += 'ForeignKey(' + foreignKey.className + ', ' + 'on_delete=models.CASCADE'
                     defaultParameter = foreignKey.parameters[0].default
                     if defaultParameter is not None:
-                        string += ', ' + 'default=' + defaultParameter.number + ')'
+                        string += ', ' + 'default=' + defaultParameter.defaultValue.number + ')'
                     else:
                         string += endElement
 
@@ -480,7 +489,16 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                         string += string2Parameters
 
                 elif booleanField is not None:
-                    string += 'BooleanField' + "()"
+                    numOfBooleanParameters = len(booleanField.parameters)
+                    string += 'BooleanField' + "("
+
+                    if numOfBooleanParameters == 0:
+                        string += endElement
+
+                    elif numOfBooleanParameters == 1:
+                        defaultParameter = booleanField.parameters[0].default
+                        if defaultParameter is not None:
+                            string += 'default=' + defaultParameter.defaultValue.number + endElement
 
             string += '\n\n\t'
             string += "'''"

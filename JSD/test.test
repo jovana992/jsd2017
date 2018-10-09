@@ -5,14 +5,14 @@ model Agencija {
 };
 
 model Korisnik {
-    agencija = ForeignKey(model = Agencija, on_delete = models.CASCADE)
+    agencija = ForeignKey(model = Agencija, on_delete = models.CASCADE, default = 1)
     ime = CharField(max_length = 10, null = True, default = 1)
     prezime = CharField(max_length = 15, null = True)
     adresa = CharField(max_length = 50, null = True)
     datumRodjenja = DateTimeField(null = True, default = timezone.now)
     jmbg = IntegerField(default = 1, null = True)
-    email = EmailField(max_length = 64, null = False)
-    pol = BooleanField()
+    email = EmailField(max_length = 64, null = False, default = 1)
+    pol = BooleanField(default = 1)
 };
 
 
