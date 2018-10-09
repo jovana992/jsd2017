@@ -522,12 +522,12 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
         for model in models:
 
             # CreateView generator
-            string += '\n\n'
-            string += '#Create view for ' + str(model['model']) + ' model.\n'
+            string += '\n\n\n'
+            string += '# Create view for ' + str(model['model']) + ' model.\n'
             string += 'class ' + str(model['model']) + 'CreateView' + '(CreateView):'
-            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
-            string += '\n\tmodel=' + str(model['model'])
-            string += '\n\tfields=['
+            string += '\n    template_name = ' + "'" + '.html' + "'"
+            string += '\n    model = ' + str(model['model'])
+            string += '\n    fields = ['
             last = len(model['modelElements']) - 1
             for i, modelElement in enumerate(model['modelElements']):
                 string += "'" + modelElement.name + "'"
@@ -535,15 +535,15 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     string += ']'
                 else:
                     string += ', '
-            string += '\n\tsuccess_url=reverse_lazy(' + "'" + "'" + ")"
+            string += '\n    success_url = reverse_lazy(' + "'" + "'" + ")"
 
             # UpdateView generator
-            string += '\n\n'
-            string += '#Update view for ' + str(model['model']) + ' model.\n'
+            string += '\n\n\n'
+            string += '# Update view for ' + str(model['model']) + ' model.\n'
             string += 'class ' + str(model['model']) + 'UpdateView' + '(UpdateView):'
-            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
-            string += '\n\tmodel=' + str(model['model'])
-            string += '\n\tfields=['
+            string += '\n    template_name = ' + "'" + '.html' + "'"
+            string += '\n    model = ' + str(model['model'])
+            string += '\n    fields = ['
             last = len(model['modelElements']) - 1
             for i, modelElement in enumerate(model['modelElements']):
                 string += "'" + modelElement.name + "'"
@@ -553,21 +553,21 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
                     string += ', '
 
             # DeleteView generator
-            string += '\n\n'
-            string += '#Delete view for ' + str(model['model']) + ' model.\n'
+            string += '\n\n\n'
+            string += '# Delete view for ' + str(model['model']) + ' model.\n'
             string += 'class ' + str(model['model']) + 'DeleteView' + '(DeleteView):'
-            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
-            string += '\n\tmodel=' + str(model['model'])
-            string += '\n\tsuccess_url=reverse_lazy(' + "'" + "'" + ")"
+            string += '\n    template_name = ' + "'" + '.html' + "'"
+            string += '\n    model = ' + str(model['model'])
+            string += '\n    success_url = reverse_lazy(' + "'" + "'" + ")"
 
             # ListView generator
-            string += '\n\n'
-            string += '#List view for ' + str(model['model']) + ' model.\n'
+            string += '\n\n\n'
+            string += '# List view for ' + str(model['model']) + ' model.\n'
             string += 'class ' + str(model['model']) + 'ListView' + '(generic.ListView):'
-            string += '\n\ttemplate_name=' + "'" + '.html' + "'"
-            string += '\n\tcontext_object_name=' + "'" + 'all_' + str(model['model']) + "'"
-            string += '\n\tdef get_queryset(self):'
-            string += '\n\t\treturn ' + str(model['model']) + '.object.all'
+            string += '\n    template_name = ' + "'" + '.html' + "'"
+            string += '\n    context_object_name = ' + "'" + 'all_' + str(model['model']) + "'"
+            string += '\n\n    def get_queryset(self):'
+            string += '\n        return ' + str(model['model']) + '.object.all'
 
         return string
 
