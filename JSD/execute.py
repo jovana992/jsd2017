@@ -636,3 +636,30 @@ def execute(path, grammar_file_name, example_file_name, export_dot, export_png):
         a = test5(models1)
         f.write(a)
 
+    # Kreiranje template i layout deirektorojuma
+    newpath = r'E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/templates/layout'
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+
+    # Generator index.html stranice
+    def test6(models):
+        string = '<!DOCTYPE html>\n'
+        string += '<html lang = "en">\n'
+        string += '<head>\n'
+        string += '\t<meta charset = "UTF-8">\n'
+        string += '\t<title> {% block title %}MyApp{% endblock %} </title>\n'
+        string += '\t{% load staticfiles %}\n'
+        string += '\t<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>\n'
+        string += '\t<script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>\n'
+        string += '</head>\n'
+        string += '<body>\n'
+        for model in models:
+            string += '<p>' + str(model['model']) + '</p>\n'
+        string += '</body>\n'
+
+        return string
+
+    with open('E:/Jovana/Desktop/zavrsi/jsd2017/JSD/generated/templates/layout/index.html', 'w') as f:
+        a = test6(models1)
+        f.write(a)
+
