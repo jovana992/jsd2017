@@ -15,4 +15,11 @@ model Korisnik {
     pol = BooleanField(default = 1)
 };
 
+model Grad {
+    naziv = CharField(max_length = 50, null = False)
+	oblast = CharField(max_length = 50)
+	postanski_broj = IntegerField(null = True, default = 1)
+    datumOsnivanja = DateTimeField(null = True, default = timezone.now)
+};
+
 
